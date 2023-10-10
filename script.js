@@ -30,6 +30,20 @@ var questionBank=[
         question:"The condition in an if/else statement is enclosed with ____.",
         choices: ["Quotation marks", "Curly Brackets", "Parenthesis","Square Brackets"],
         answer:"Curly Brackets"
+    },
+    {
+        question:"Arrays in JavaScript can be used to store___.",
+        choices:["Numbers and Strings","Other Arrays","Booleans","All of the Above"],
+        answer:"All of the Above"
+    },
+    {
+        question:">A very useful tool used during development and de-bugging for printing content to the de-bugger is____.",
+        choices:["JavaScript","Terminal/GitBash","For Loops","Console.log"],
+        answer:"Console.log"
+    },
+    {
+        question:"Commonly used data types DO NOT include:",
+        choices:["Strings","Booleans","Alerts","Numbers"]
     }
 
 ];
