@@ -1,21 +1,15 @@
 var questionNumber=0;
 var gameOver=document.querySelector("#gameOver");
 var choices=document.querySelector("#choices");
-// added var with queryselector for each question
 var questionContainer=document.querySelector(".questions");
-var answer1=document.querySelector("#answer-1");
-var answer2=document.querySelector("#answer-2");
-var answer3=document.querySelector("#answer-3");
-var answer4=document.querySelector("#answer-4");
-var answer5=document.querySelector("#answer-5");
-// added var for all answers
+
 var start=document.querySelector("#start-button");
 // added var for start button
 var timerElement=document.querySelector("#timer");
 // added var for timer element
 var next=document.querySelector("#next");
 // bank for all questions and answers
-var timerCount=10;
+var timerCount=75;
 var questionBank=[
     {
         question:"String values must be enclosed within ____ when being assigned to variables.",
@@ -45,30 +39,49 @@ var questionBank=[
 ];
 
 // using Show to show the questions as the user clicks the button
+
 // function to append questions to page
 function showQuestion(){
     var currQuestion=questionBank[questionNumber]
+    // Do I need to define questionNumber somewhere else? and if so, how?? Declaring it as a var disrupts the code. 
     var questionTitle=document.getElementById("questionHeader");
     questionTitle.textContent=currQuestion.question;
     choices.innerHTML="";
     
-    // for (var i=0; i<currQuestion.choices.length;i++){
-    //     var choices=currQuestion.choices[i];
-    //     var choiceBtn=document.createElement("button");
-    //     choiceBtn.setAttribute("class","choice");
-    //     choiceBtn.setAttribute("value", choice);
-    //     choiceBtn.textContent= i + 1 + ". " + choice;
-    //     choices.appendChild(choiceBtn);
-    // }
     // loop through questions and choices
+    var answer=currQuestion.answer
+
     currQuestion.choices.forEach(function(option,i){
         var choiceIndex=document.createElement("button")
-       
+        console.log(choiceIndex)
         choiceIndex.setAttribute("value", option)
         choiceIndex.textContent=i+1+". "+ option;
+        // checks to see if the answer clicked is true
+        if (option===currQuestion.answer){
+            choiceIndex.dataset.correct=true;
+            
+        }
+        choiceIndex.addEventListener("click",function(event){
+            answerClick(event.target);
+            
+            
+        })
         choices.appendChild(choiceIndex)
     })
-    // console.log('these are my choices', choices)
+
+    function answerClick(selectedChoice){
+        if (selectedChoice===answer){
+            console.log("correct")
+        }else{
+            timerCount-5;
+        }
+        console.log("it works")
+
+        questionNumber++
+
+    }
+    
+    document.body.appendChild(choices)
 }
 // this function will be called if the user does not finish in the alotted time
 function timesUp(){
@@ -77,8 +90,9 @@ function timesUp(){
         clearInterval(timer);
     }
 }
+// this function starts the timer and shows the questions to begin the quiz
 function startGame(){
-    timerCount=10;
+    timerCount=75;
     startTimer();
     showQuestion()
 }
@@ -90,9 +104,7 @@ function startTimer(){
         if (timerCount===0){
             timesUp();
             clearInterval(timer);
-            console.log("timer")
        }
-    //    timer keeps going into the negative
 
     },1000);
 }
