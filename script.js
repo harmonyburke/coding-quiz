@@ -10,6 +10,7 @@ var timerElement=document.querySelector("#timer");
 var next=document.querySelector("#next");
 // bank for all questions and answers
 var timerCount=75;
+
 var questionBank=[
     {
         question:"String values must be enclosed within ____ when being assigned to variables.",
@@ -33,12 +34,13 @@ var questionBank=[
     },
     {
         question:"Commonly used data types DO NOT include:",
-        choices:["Strings","Booleans","Alerts","Numbers"]
+        choices:["Strings","Booleans","Alerts","Numbers"],
+        answer:"Alerts"
     }
 
 ];
 
-// using Show to show the questions as the user clicks the button
+// using Show to show the questions as the user 
 
 // function to append questions to page
 function showQuestion(){
@@ -52,6 +54,7 @@ function showQuestion(){
     var answer=currQuestion.answer
 
     currQuestion.choices.forEach(function(option,i){
+        
         var choiceIndex=document.createElement("button")
         console.log(choiceIndex)
         choiceIndex.setAttribute("value", option)
@@ -67,19 +70,22 @@ function showQuestion(){
             
         })
         choices.appendChild(choiceIndex)
-    })
+        // this actually adds the choices onto the webpage
+    }
 
     function answerClick(selectedChoice){
         if (selectedChoice===answer){
             console.log("correct")
+            questionNumber++
+            
         }else{
             timerCount-5;
         }
         console.log("it works")
 
-        questionNumber++
 
     }
+
     
     document.body.appendChild(choices)
 }
