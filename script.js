@@ -8,7 +8,6 @@ var gameOver=document.querySelector("#gameOver");
 var choices=document.querySelector("#choices");
 var questionContainer=document.querySelector(".questions");
 // var finalScore=document.querySelector("#final-score")
-var submit=document.querySelector("#submit");
 var start=document.querySelector("#start-button");
 // added var for start button
 var timerElement=document.querySelector("#timer");
@@ -46,34 +45,36 @@ var questionBank=[
 
 
 
-// using Show to show the questions as the user 
+
 var currQuestion=questionBank[questionNumber];
 
-// function to append questions to page
+
 function showQuestion(){
+    // this function adds the questions and choices to the webpage
     var allQuestions=questionBank.length;
     var answer=currQuestion.answer
-//     var currQuestion=questionBank[questionNumber];
-// //    declares the currQuestion var as whatever number it is in the question bank
+    // var currQuestion=questionBank[questionNumber];
+//    declares the currQuestion var as whatever number it is in the question bank
     var questionTitle=document.getElementById("questionHeader");
     questionTitle.textContent=currQuestion.question;
     choices.innerHTML="";
     // clears the choices when your move to the next question
-    
-    // loop through questions and choices
 
     currQuestion.choices.forEach(function(option,i){
+        // this is a for loops that loops the questions and choices
         
         var choiceIndex=document.createElement("button")
+        // creates a button for the choices
         console.log(choiceIndex)
         // checking to make sure this function is running correctly.
         choiceIndex.setAttribute("value", option)
         // sets the items in the choices array as  option buttons
         choiceIndex.textContent=i+1+". "+ option;
-        // checks to see if the answer clicked is true
+        // this sets the text content of the button element "choiceIndex"
         if (option===currQuestion.answer){
             choiceIndex.dataset.correct=true;
-            
+            // checks to see if the answer clicked is true
+           
         }
         choiceIndex.addEventListener("click",function(event){
             answerClick(event.target);
@@ -82,7 +83,12 @@ function showQuestion(){
         })
         choices.appendChild(choiceIndex)
         // this actually adds the choices onto the webpage
-        allQuestions++
+        questionNumber++
+        // moves to the next question in the object
+        if (questionNumber>=allQuestions){
+            finishQuiz()
+            // runs the finishquiz function once all questions in the object are ran through
+        }
 
     })
     
@@ -92,7 +98,7 @@ function showQuestion(){
         // sets the answer var for the question index in the question bank
         if (selectedChoice===answer){
             console.log("correct")
-            correctAnswers++
+            questionNumber++
             score+=1;
             // if the selected answer is correct it should cycle to the next answer and add 1 to the score.
 
@@ -117,7 +123,7 @@ function showQuestion(){
 
 // this function will be called if the user does not finish in the alotted time
 function timesUp(){
-    gameOver.textContent= "Too slow!"
+    gameOver.textContent= "Loser! Try Again!"
     if (timerCount===0){
         clearInterval(showQuestion);
         // clears the questions from the page
@@ -142,12 +148,13 @@ function startTimer(){
     },1000);
 }
 function finishQuiz(){
-    if (currQuestion>4){
+    if (questionNumber>4){
         questionContainer.style.display=none;
         // hides the question container after all questions are answered
         finalScore.textContent="You scored:"+ score +"points!"
 
         endScore()
+        inputBar()
 
 
     }
@@ -169,25 +176,16 @@ function endScore(){
 
 function renderLastScore(){
     var userScore=localStorage.getItem("score")
-    // saves the users score to local storage
-    finalScore.textContent="enter your initials to save your score!"
-    
-    // submit.addEventListener("click", function(event){
-    //     var 
-
-    // })
-    
+    // save the users score to local storage
+    userScore.localStorage.setItem("score");
   
 
 }
 function inputBar(){
-    var inputState=Element.getAttribute("data-state")
-    Element.setAttribute("data-state", "hidden")
-    // sets the display of the form so it doesn't show on page load 
-    if(inputState===hidden){
-        inputState.style.display="block"
+    if (questionNumber>4){
+        finalScore.style.display="block";
+        // shows the final score initial input once all questions are answered
     }
-    // changes the display to block
 }
 
 

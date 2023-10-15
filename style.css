@@ -1,7 +1,8 @@
 :root{
     --background: #374b4a;
     --textcolor: #c5fffd;
-    --buttoncolor:#8b8bae;
+    --buttoncolor:#99d17b;
+
 
 }
 /* added root for colors used to keep organized */
@@ -37,23 +38,19 @@ ul{
     display: none;
 } */
 button{
-    background-color:var(--buttoncolor);
+    background-color: var(--buttoncolor);
+    color:var(--background);
     margin: 20px;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
+    border-radius: 50%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
 
 button::after{
     background-color: #a1674a;
 }
-
-#next{
-    display: flex;
-    justify-content: flex-end;
-}
-#last{
-    display: flex;  
-    justify-content: flex-end;
+#final-score{
+    display: none;
 }
