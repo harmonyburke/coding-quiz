@@ -177,7 +177,7 @@ function showQuestion() {
     function renderLastScore() {
         var userInitials = document.getElementById("userInitials")
         // gets the information for the element from the html
-        var userScore = localStorage.getItem("value", "score")
+        var userScore = JSON.parse(localStorage.getItem("score"))
         // save the users score to local storage
         userScore.localStorage.setItem("score");
         var userInput = localStorage.getItem("value", userInitials)
