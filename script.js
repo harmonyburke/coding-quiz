@@ -40,25 +40,35 @@ var questionBank=[
         choices:["Strings","Booleans","Alerts","Numbers"],
         answer:"Alerts"
     }
-
+    
 ];
 
 
 
-
-var currQuestion=questionBank[questionNumber];
-
-
 function showQuestion(){
+    var currQuestion=questionBank[questionNumber];
+    // the current question is whatever index we are cycled on in the question bank
     // this function adds the questions and choices to the webpage
     var allQuestions=questionBank.length;
-    var answer=currQuestion.answer
-    // var currQuestion=questionBank[questionNumber];
-//    declares the currQuestion var as whatever number it is in the question bank
+ 
     var questionTitle=document.getElementById("questionHeader");
     questionTitle.textContent=currQuestion.question;
+    // adds the questions to the page
     choices.innerHTML="";
     // clears the choices when your move to the next question
+//     // for (i=0; i<currQuestion.choices.length; i++){
+//     //     // sets the index to 0(the first item in the array) and cycles through the choices and questions in the object
+//     //     var choiceIndex=document.createElement("button")
+//     //     // creates a button for the choices
+//     //     choiceIndex.setAttribute("value", userChoice)
+//     //     console.log(userChoice)
+//     //     // sets the items in the choices array as  option buttons
+//     //     choiceIndex.textContent=i+1+". "+ userChoice;
+//     //     // this sets the text content of the button element "choiceIndex"
+//     //     if (userChoice===currQuestion.answer){
+//     //         questionNumber++
+//     //     }
+//     // }
 
     currQuestion.choices.forEach(function(option,i){
         // this is a for loops that loops the questions and choices
@@ -83,7 +93,7 @@ function showQuestion(){
         })
         choices.appendChild(choiceIndex)
         // this actually adds the choices onto the webpage
-        questionNumber++
+        // eachQuestion++
         // moves to the next question in the object
         if (questionNumber>=allQuestions){
             finishQuiz()
@@ -91,7 +101,8 @@ function showQuestion(){
         }
 
     })
-    
+
+
 
     function answerClick(selectedChoice){
         var answer=currQuestion.answer
@@ -99,34 +110,37 @@ function showQuestion(){
         if (selectedChoice===answer){
             console.log("correct")
             questionNumber++
+            // moves the loop to the next question
             score+=1;
-            // if the selected answer is correct it should cycle to the next answer and add 1 to the score.
+            // adds points to the final score
+            timerCount+5
 
             console.log("check answerClick")
-
             
         }else{
             timerCount-5;
             // if the wrong answer is choser, this will deduct 5 seconds from the timer
         }
 
+        document.body.appendChild(choices)
+        // adds choices to the html body
+        choices.addEventListener("click",answerClick);
+        // adds a click event to the choices button and fires off the answerClick function when that click occurs
+        points()
 
     }
+   
 
     
-    document.body.appendChild(choices)
-    // adds choices to the html body
-    choices.addEventListener("click",answerClick);
-    // adds a click event to the choices button and fires off the answerClick function when that click occurs
-    points()
-}
+
 
 // this function will be called if the user does not finish in the alotted time
 function timesUp(){
-    gameOver.textContent= "Loser! Try Again!"
+    gameOver.textContent= "Try Again!"
     if (timerCount===0){
-        clearInterval(showQuestion);
-        // clears the questions from the page
+        clearInterval(timer);
+        // clears timer
+        questionContainer.style.display="none";
     }
 }
 // this function starts the timer and shows the questions to begin the quiz
@@ -163,6 +177,7 @@ function finishQuiz(){
 
 function points(){
     correctAnswers++;
+    console.log(correctAnswers)
     // keeps track of the points as the questions are answered
  
 }
@@ -187,5 +202,5 @@ function inputBar(){
         // shows the final score initial input once all questions are answered
     }
 }
-
+}
 
