@@ -1,3 +1,4 @@
+var userScore=[];
 var questionNumber = 0;
 var timer;
 var timerCount = 75;
@@ -102,7 +103,7 @@ function showQuestion() {
             console.log("correct")
             // questionNumber++
             // moves the loop to the next question
-            score += 1;
+            correctAnswers += 1;
             // adds points to the final score
 
             // questionNumber+=1
@@ -151,7 +152,7 @@ function showQuestion() {
             // hides the question container after all questions are answered
             finalScore.textContent = "You scored:" + score + "points!"
 
-            endScore()
+            saveScore()
             inputBar()
             renderLastScore()
 
@@ -169,22 +170,34 @@ function showQuestion() {
     function endScore() {
         score = points() * 20
         // this sets the score to the total number of correct answers *20. If all answers are correct the final score would be 100.
-        renderLastScore();
         console.log("end score")
+        return score
 
     }
 
     function renderLastScore() {
         var userInitials = document.getElementById("userInitials")
         // gets the information for the element from the html
-        var userScore = JSON.parse(localStorage.getItem("score"))
+        userScore = JSON.parse(localStorage.getItem("score"))
+        // 
         // save the users score to local storage
-        userScore.localStorage.setItem("score");
-        var userInput = localStorage.getItem("value", userInitials)
-        // saves the value of the user input to local storage
+        
+        
+        
+    }
+    function saveScore(){
+        userScore = JSON.parse(localStorage.getItem("score"))
+        if (!userScore){
+            userScore=[]
+        }
+        var score=endScore()
+        userScore.push(score);
+        console.log(score)
+        localStorage.setItem("score", JSON.stringify(userScore));
+    // saves the value of the user input to local storage
 
 
-
+    
     }
     function inputBar() {
         if (questionNumber > 4) {
