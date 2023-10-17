@@ -178,7 +178,7 @@ function showQuestion() {
     function renderLastScore() {
         var userInitials = document.getElementById("userInitials")
         // gets the information for the element from the html
-        userScore = JSON.parse(localStorage.getItem("score"))
+        userScore = JSON.parse(localStorage.getItem(score))
         // 
         // save the users score to local storage
         
@@ -186,14 +186,14 @@ function showQuestion() {
         
     }
     function saveScore(){
-        userScore = JSON.parse(localStorage.getItem("score"))
+        userScore = JSON.parse(localStorage.getItem(score))
         if (!userScore){
             userScore=[]
         }
         var score=endScore()
         userScore.push(score);
         console.log(score)
-        localStorage.setItem("score", JSON.stringify(userScore));
+        localStorage.setItem("score", JSON.stringify(score));
     // saves the value of the user input to local storage
 
 
