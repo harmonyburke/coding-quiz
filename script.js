@@ -146,10 +146,10 @@ function showQuestion() {
 
 
     function finishQuiz() {
-        var finalScore=score
         if (questionNumber > 4) {
             questionContainer.style.display = "none";
             // hides the question container after all questions are answered
+            score=endScore();
             finalScore.textContent = "You scored:" + score + "points!"
 
             saveScore()
