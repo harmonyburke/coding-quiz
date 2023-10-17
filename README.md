@@ -9,10 +9,11 @@ I created this webpage to act as a fun quiz about coding! The user will click th
 
 
 ## Installation
-visit this webpage at ______
+visit this webpage at https://harmonyburke.github.io/coding-quiz/
 ## Usage
 
 To use this quiz, click the start button. The timer will begin and the first question and its choices will apear. Click on your answer. If the answer is incorrect, you will lose 10 seconds of time. Once all questions are answered, your score will be saved and you can input your initials. 
+![Alt Text](<images\screenshot(1).png>)
 
 
 
