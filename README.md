@@ -18,5 +18,5 @@ To use this quiz, click the start button. The timer will begin and the first que
 
 
 ## Credits
-I received help via my tutor Josshy Olea. I also used W3schools, numerous youtube videos, and help from my classmates to complete this project.
+I received help via my tutor Josshy Olea, TA Andrew Hudgins, and my instructor. I also used W3schools, numerous youtube videos, and help from my classmates to complete this project.
 
